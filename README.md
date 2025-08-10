@@ -1,6 +1,6 @@
 # A03 Flavored Linux Mint
 
-This is a post installation script for our laptops
+Post installation script for our laptops
 
 
 ### What does this script do?
