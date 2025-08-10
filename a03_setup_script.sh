@@ -1,11 +1,9 @@
-
 #!/bin/bash
+
 USER=student
 
 APPS_DIR=/usr/share/applications
 RULES_DIR=/etc/udev/rules.d
-
-set -x
 
 install_codium() {
     wget https://github.com/VSCodium/vscodium/releases/download/1.103.05312/codium_1.103.05312_amd64.deb -O codium.deb
@@ -13,7 +11,7 @@ install_codium() {
     rm -f ./codium.deb
 
     # vscode aliases
-    echo "alias code='codium'" >> ~/.profile
+    echo "alias code='codium'" >> /root/.profile
     echo "alias code='codium'" >> /home/$USER/.bashrc
 
     echo "Installed VSCodium"
@@ -83,8 +81,9 @@ setup_wallpapers() {
     # todo
 
     ## LOCAL SOURCE
-    IMG=/usr/share/backgrounds/linuxmint/A03.png
-    cp -r ./wallpaper.png $IMG
+    BACKGROUND_DIR=/usr/share/backgrounds/linuxmint
+    IMG=$BACKGROUND_DIR/A03.png
+    cp -r ./wallpapers/* $BACKGROUND_DIR
 
     # Get the Cinnamon session PID for 'student'
     USER_PID=$(pgrep -u student cinnamon-sess | head -n1)
@@ -112,6 +111,10 @@ setup_wallpapers() {
     echo "background=$IMG" >> $CONF
 }
 
+config_chromium() {
+    cp -r ./.config/chromium/Default/* /home/$USER/.config/chromium/Default/
+}
+
 setup_splash_screen() {
     
     ## From mirror source
@@ -135,21 +138,44 @@ theeming() {
     dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
 }
 
+install_various_packages() {
+    # Define the path to your packages list
+    PACKAGE_FILE=".packages"
 
+
+    # Check if the package list file exists
+    if [[ ! -f "$PACKAGE_FILE" ]]; then
+        echo "Package list file '$PACKAGE_FILE' not found!"
+        exit 1
+    fi
+
+    # Read each line (package name) from the file
+    while IFS= read -r package || [[ -n "$package" ]]; do
+    # Skip empty lines
+    if [[ -z "$package" ]]; then
+        continue
+    fi
+    
+    # Install the package
+    echo "Installing $package..."
+    apt install "$package" -y
+    done < "$PACKAGE_FILE"
+
+    echo "All packages installed."
+}
 
 # # Update system
 # apt update
 # apt upgrade
 
 # # Install apps
-# apt install chromium -y
-# apt install jq -y
-# apt install git -y
-# apt install blender -y
-# apt install gimp -y
+# install_various_packages
 # install_codium
 # install_arduino_ide
 # install_orca_slicer
+
+# # Configuration overwrite
+config_chromium
 
 # # Post install setup
 # setup_splash_screen

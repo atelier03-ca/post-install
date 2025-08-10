@@ -1,0 +1,135 @@
+{
+   "checksum": "cf5e17c08d38c8793471984af216ff2c",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13399302780104941",
+            "date_last_used": "0",
+            "guid": "5c6a3098-5bfd-4139-af37-b0054cbf661e",
+            "id": "8",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "",
+            "type": "url",
+            "url": "https://atelier03.ca/fr"
+         }, {
+            "date_added": "13399304267929511",
+            "date_last_used": "0",
+            "guid": "73dbcb84-37ad-4114-8e8e-09de2cb3319e",
+            "id": "15",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "GitHub",
+            "type": "url",
+            "url": "https://github.com/"
+         }, {
+            "date_added": "13399303829512280",
+            "date_last_used": "0",
+            "guid": "22a300b6-7468-4f8c-a352-f8d4e6b4ef06",
+            "id": "10",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Desmos",
+            "type": "url",
+            "url": "https://www.desmos.com/calculator"
+         }, {
+            "date_added": "13399302811993612",
+            "date_last_used": "0",
+            "guid": "c0795b6e-723b-419f-bad2-c5cd63a717fb",
+            "id": "9",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Scratch",
+            "type": "url",
+            "url": "https://scratch.mit.edu/projects/editor"
+         }, {
+            "date_added": "13399302756630529",
+            "date_last_used": "0",
+            "guid": "e5a39f17-ebea-4319-a2c0-917b7899d913",
+            "id": "7",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Tinkercad",
+            "type": "url",
+            "url": "https://www.tinkercad.com/"
+         }, {
+            "date_added": "13399304020201430",
+            "date_last_used": "0",
+            "guid": "c4382e51-a8b4-4319-9b3d-9d093e07ae4e",
+            "id": "14",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "micro:bit",
+            "type": "url",
+            "url": "https://makecode.microbit.org/"
+         }, {
+            "date_added": "13399303918037253",
+            "date_last_used": "0",
+            "guid": "06cf4eb7-f81d-4845-95e6-20ef013bd4cb",
+            "id": "12",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "p5.js",
+            "type": "url",
+            "url": "https://editor.p5js.org/"
+         }, {
+            "date_added": "13399303938340397",
+            "date_last_used": "0",
+            "guid": "448437ed-2e78-48bc-81b0-94972e5bb452",
+            "id": "13",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Reference",
+            "type": "url",
+            "url": "https://p5js.org/reference/"
+         }, {
+            "date_added": "13399303878047636",
+            "date_last_used": "0",
+            "guid": "2a4c8c37-f0e1-40e1-8774-6208020c4e0e",
+            "id": "11",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Reference",
+            "type": "url",
+            "url": "https://docs.arduino.cc/language-reference/"
+         } ],
+         "date_added": "13399234271103077",
+         "date_last_used": "0",
+         "date_modified": "13399304287152011",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13399234271103077",
+         "date_last_used": "0",
+         "date_modified": "13399302756630529",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13399234271103077",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
