@@ -14,16 +14,14 @@ Post installation script for our laptops
 
 * For Linux Mint 22.0 Wilma
 
-### How to run it
-
-1. Download this repository as a `.zip` and extract it.
-
-2. Open a terminal in the extracted directory and run:
+### How to use
 
 ```sh
-
+# Download and unzip
 wget https://github.com/atelier03-ca/post-install/archive/refs/heads/master.zip -O post-install.zip
 unzip post-install.zip
+
+# Make it executable and Run
 cd post-install-master
 chmod +x install.sh
 sudo ./install.sh
