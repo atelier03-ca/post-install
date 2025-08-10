@@ -19,13 +19,12 @@ Post installation script for our laptops
 
 2. Open a terminal in the extracted directory and run:
 
-```
-chmod +x ./install.sh
-```
+```sh
 
-then run the install script as root
-
-```
+wget https://github.com/atelier03-ca/post-install/archive/refs/heads/master.zip -O post-install.zip
+unzip post-install.zip
+cd post-install-master
+chmod +x install.sh
 sudo ./install.sh
 ```
 

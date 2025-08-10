@@ -164,22 +164,37 @@ install_various_packages() {
     echo "All packages installed."
 }
 
-# # Update system
-# apt update
-# apt upgrade
+# --- MAIN --- #
 
-# # Install apps
-# install_various_packages
-# install_codium
-# install_arduino_ide
-# install_orca_slicer
+# Update system
+apt update
+apt upgrade
 
-# # Configuration overwrite
+# Install apps
+install_various_packages
+install_codium
+install_arduino_ide
+install_orca_slicer
+
+# Configuration overwrite
 config_chromium
 
-# # Post install setup
-# setup_splash_screen
-# setup_pinned_apps
-# setup_wallpapers
-# setup_microbit
-# theeming
+# Post install setup
+setup_splash_screen
+setup_pinned_apps
+setup_wallpapers
+setup_microbit
+theeming
+
+# Final message and prompt reboot
+echo -e "\n\e[92mConfiguration complete!\e[0m\n";
+read -p "Do you want to reboot? [y/N]: " answer
+case "$answer" in
+    [yY])
+        echo "Rebooting..."
+        reboot
+        ;;
+    *)
+        echo "Reboot cancelled."
+        ;;
+esac
