@@ -27,5 +27,3 @@ cd post-install-master
 chmod +x install.sh
 sudo ./install.sh
 ```
-
-You can then remove the directory and `.zip` and reboot your system.
