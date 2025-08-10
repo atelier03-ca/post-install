@@ -136,6 +136,9 @@ theeming() {
     # Prefer dark theme
     gsettings set org.x.apps.portal color-scheme 'prefer-dark'
     dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+
+    # Terminal theme
+    dconf load /org/gnome/terminal/legacy/profiles:/ < ./terminal.dconf
 }
 
 install_various_packages() {
