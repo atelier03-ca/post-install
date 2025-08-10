@@ -7,7 +7,7 @@ Post installation script for our laptops
 ### What does this script do?
 
 * Installs STEM [packages](./.packages) & apps
-* Configures device permissions for Arduino & micro:
+* Configures device permissions for Arduino & micro:bit
 * Configures theme, background and splash screen
 
 ### Target
