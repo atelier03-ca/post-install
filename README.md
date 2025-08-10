@@ -2,6 +2,7 @@
 
 Post installation script for our laptops
 
+![Thumnail](./demo/THUMBNAIL.png)
 
 ### What does this script do?
 
