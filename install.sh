@@ -1,25 +1,30 @@
 #!/bin/bash
 
-USER=student
-
 APPS_DIR=/usr/share/applications
+BACKGROUND_DIR=/usr/share/backgrounds/linuxmint
+PLYMOUTH_DIR=/usr/share/plymouth
 RULES_DIR=/etc/udev/rules.d
 
+# Application Download links
+CODIUM=https://github.com/VSCodium/vscodium/releases/download/1.103.05312/codium_1.103.05312_amd64.deb
+ARDUINO_IDE=https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.6_Linux_64bit.AppImage
+ORCA_SLICER=https://github.com/SoftFever/OrcaSlicer/releases/download/v2.3.0/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.3.0.AppImage
+
 install_codium() {
-    wget https://github.com/VSCodium/vscodium/releases/download/1.103.05312/codium_1.103.05312_amd64.deb -O codium.deb
+    wget $CODIUM -O codium.deb
     dpkg -i ./codium.deb
     rm -f ./codium.deb
 
     # vscode aliases
     echo "alias code='codium'" >> /root/.profile
-    echo "alias code='codium'" >> /home/$USER/.bashrc
+    echo "alias code='codium'" >> /home/$SUDO_USER/.bashrc
 
     echo "Installed VSCodium"
 }
 
 install_arduino_ide() {
     # Install AppImage
-    wget https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.6_Linux_64bit.AppImage -O $APPS_DIR/arduino-ide.AppImage
+    wget $ARDUINO_IDE -O $APPS_DIR/arduino-ide.AppImage
     chmod +x $APPS_DIR/arduino-ide.AppImage
 
     # Create a desktop entry
@@ -35,7 +40,7 @@ install_arduino_ide() {
 }
 
 install_orca_slicer() {
-    wget https://github.com/SoftFever/OrcaSlicer/releases/download/v2.3.0/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.3.0.AppImage -O $APPS_DIR/orca-slicer.AppImage
+    wget $ORCA_SLICER -O $APPS_DIR/orca-slicer.AppImage
     chmod +x $APPS_DIR/orca-slicer.AppImage
 
     # Create a desktop entry
@@ -55,7 +60,7 @@ setup_microbit() {
 
 setup_pinned_apps() {
     # Define your Icing Task Manager config file:
-    FILE=$(ls /home/$USER/.config/cinnamon/spices/grouped-window-list@cinnamon.org/*.json)
+    FILE=$(ls /home/$SUDO_USER/.config/cinnamon/spices/grouped-window-list@cinnamon.org/*.json)
 
     # New pinned apps list (edit as needed)
     NEW_APPS='[
@@ -71,36 +76,32 @@ setup_pinned_apps() {
     # Use jq to update the field in-place
     jq --argjson arr "$NEW_APPS" '.["pinned-apps"].value = $arr' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
     
-    chown -R $USER:$USER "/home/$USER/.config/cinnamon"
+    chown -R $SUDO_USER:$SUDO_USER "/home/$SUDO_USER/.config/cinnamon"
 
     echo "Configured pinned applications on panel"
 }
 
 setup_wallpapers() {
-    ## From mirror source
-    # todo
-
-    ## LOCAL SOURCE
-    BACKGROUND_DIR=/usr/share/backgrounds/linuxmint
     IMG=$BACKGROUND_DIR/A03.png
+
     cp -r ./wallpapers/* $BACKGROUND_DIR
 
     # Get the Cinnamon session PID for 'student'
-    USER_PID=$(pgrep -u student cinnamon-sess | head -n1)
+    USER_PID=$(pgrep -u $SUDO_USER cinnamon-sess | head -n1)
     if [ -z "$USER_PID" ]; then
-        echo "Could not find cinnamon session for user 'student'."
+        echo "Could not find cinnamon session for user '$SUDO_USER'."
         return 1
     fi
 
     # Extract the DBUS_SESSION_BUS_ADDRESS for the session
     USER_DBUS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$USER_PID/environ | tr '\0' '\n' | grep ^DBUS_SESSION_BUS_ADDRESS= | cut -d= -f2-)
     if [ -z "$USER_DBUS" ]; then
-        echo "Could not find DBUS_SESSION_BUS_ADDRESS for user 'student'."
+        echo "Could not find DBUS_SESSION_BUS_ADDRESS for user '$SUDO_USER'."
         return 1
     fi
 
-    # Set the wallpaper for user 'student'
-    sudo -u student DBUS_SESSION_BUS_ADDRESS="$USER_DBUS" \
+    # Set the wallpaper for user
+    sudo -u $SUDO_USER DBUS_SESSION_BUS_ADDRESS="$USER_DBUS" \
       gsettings set org.cinnamon.desktop.background picture-uri "file://$IMG"
 
     # Set login screen background for Slick Greeter
@@ -112,16 +113,12 @@ setup_wallpapers() {
 }
 
 config_chromium() {
-    cp -r ./.config/chromium/Default/* /home/$USER/.config/chromium/Default/
+    cp -r ./.config/chromium/Default/* /home/$SUDO_USER/.config/chromium/Default/
 }
 
 setup_splash_screen() {
-    
-    ## From mirror source
-    # todo
-
     ## LOCAL SOURCE
-    cp -r ./splash/* /usr/share/plymouth/themes/mint-logo/
+    cp -r ./splash/* $PLYMOUTH_DIR/themes/mint-logo/
     
     update-initramfs -u -k all
 }
@@ -154,14 +151,14 @@ install_various_packages() {
 
     # Read each line (package name) from the file
     while IFS= read -r package || [[ -n "$package" ]]; do
-    # Skip empty lines
-    if [[ -z "$package" ]]; then
-        continue
-    fi
-    
-    # Install the package
-    echo "Installing $package..."
-    apt install "$package" -y
+        # Skip empty lines
+        if [[ -z "$package" ]]; then
+            continue
+        fi
+        
+        # Install the package
+        echo "Installing $package..."
+        apt install "$package" -y
     done < "$PACKAGE_FILE"
 
     echo "All packages installed."
