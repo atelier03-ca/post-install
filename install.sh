@@ -61,8 +61,6 @@ install_orca_slicer() {
     echo "Categories=Development;IDE;" >> $ORCA_SHORTCUT
     echo "Comment=Open-source slicer" >> $ORCA_SHORTCUT
 
-    echo $DESKTOP_ENTRY > $APPS_DIR/orca-slicer.desktop
-
     # Update desktop entries
     update-desktop-database $APPS_DIR
 }
