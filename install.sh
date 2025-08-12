@@ -28,8 +28,15 @@ install_arduino_ide() {
     chmod +x $APPS_DIR/arduino-ide.AppImage
 
     # Create a desktop entry
-    DESKTOP_ENTRY="[Desktop Entry]\nType=Application\nName=Arduino IDE\nExec=$APPS_DIR/arduino-ide.AppImage\nIcon=arduino-ide\nTerminal=false\nCategories=Development;IDE;\nComment=Open-source electronics prototyping platform"
-    echo $DESKTOP_ENTRY > $APPS_DIR/arduino-ide.desktop
+    INO_SHORTCUT=$APPS_DIR/arduino-ide.desktop
+    echo "[Desktop Entry]" > $INO_SHORTCUT
+    echo "Type=Application" >> $INO_SHORTCUT
+    echo "Name=Arduino IDE" >> $INO_SHORTCUT
+    echo "Exec=$APPS_DIR/arduino-ide.AppImage" >> $INO_SHORTCUT
+    echo "Icon=arduino-ide" >> $INO_SHORTCUT
+    echo "Terminal=false" >> $INO_SHORTCUT
+    echo "Categories=Development;IDE;" >> $INO_SHORTCUT
+    echo "Comment=Open-source electronics prototyping platform" >> $INO_SHORTCUT
 
     # Update desktop entries
     update-desktop-database $APPS_DIR
@@ -44,7 +51,16 @@ install_orca_slicer() {
     chmod +x $APPS_DIR/orca-slicer.AppImage
 
     # Create a desktop entry
-    DESKTOP_ENTRY="[Desktop Entry]\nType=Application\nName=Orca Slicer v2.3.0\nExec=$APPS_DIR/orca-slicer.AppImage\nIcon=orca-slicer\nTerminal=false\nCategories=Development;IDE;\nComment=Open-source slicer"
+    ORCA_SHORTCUT=$APPS_DIR/orca-slicer.desktop
+    echo "[Desktop Entry]" > $ORCA_SHORTCUT
+    echo "Type=Application" >> $ORCA_SHORTCUT
+    echo "Name=Orca Slicer v2.3.0" >> $ORCA_SHORTCUT
+    echo "Exec=$APPS_DIR/orca-slicer.AppImage" >> $ORCA_SHORTCUT
+    echo "Icon=orca-slicer" >> $ORCA_SHORTCUT
+    echo "Terminal=false" >> $ORCA_SHORTCUT
+    echo "Categories=Development;IDE;" >> $ORCA_SHORTCUT
+    echo "Comment=Open-source slicer" >> $ORCA_SHORTCUT
+
     echo $DESKTOP_ENTRY > $APPS_DIR/orca-slicer.desktop
 
     # Update desktop entries
@@ -113,12 +129,12 @@ setup_wallpapers() {
 }
 
 config_chromium() {
-    cp -r ./.config/chromium/Default/* /home/$SUDO_USER/.config/chromium/Default/
+    cp -fr ./.config/chromium/Default/* /home/$SUDO_USER/.config/chromium/Default/
 }
 
 setup_splash_screen() {
     ## LOCAL SOURCE
-    cp -r ./splash/* $PLYMOUTH_DIR/themes/mint-logo/
+    cp -fr ./splash/* $PLYMOUTH_DIR/themes/mint-logo/
     
     update-initramfs -u -k all
 }
